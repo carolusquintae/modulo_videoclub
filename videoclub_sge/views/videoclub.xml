@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- VISTA ÁRBOL -->
+        <record model="ir.ui.view" id="videoclub_sge.pelis_arbol">
+            <field name="name">videoclub_sge.pelis_arbol</field>
+            <field name="model">videoclub.pelis</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="titulo"/>
+                    <field name="director"/>
+                    <field name="clasificacion"/>
+                    <field name="presupuesto"/>
+                    <field name="fechaestreno"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- VISTA FORMULARIO -->
+        <record model="ir.ui.view" id="videoclub_sge.pelis_formulario">
+            <field name="name">videoclub_sge.pelis_formulario</field>
+            <field name="model">videoclub.pelis</field>
+            <field name="arch" type="xml">
+                <form string="Películas">
+                    <group string="DATOS DE LA PELÍCULA">
+                        <field name="titulo"/>
+                        <field name="director"/>
+                        <field name="clasificacion"/>
+                        <field name="presupuesto"/>
+                        <field name="fechaestreno"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <!-- ACCIÓN DE VENTANA -->
+        <record model="ir.actions.act_window" id="videoclub_sge.pelis_ventana">
+            <field name="name">Películas</field>
+            <field name="res_model">videoclub.pelis</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- MENÚS -->
+        <menuitem name="VIDEOCLUB" id="videoclub_sge.menu_root"/>
+        <menuitem name="Películas" id="videoclub_sge.menu_pelis" 
+                  parent="videoclub_sge.menu_root" 
+                  action="videoclub_sge.pelis_ventana"/>
+    </data>
+</odoo>
