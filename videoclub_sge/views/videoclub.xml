@@ -47,3 +47,127 @@
                   action="videoclub_sge.pelis_ventana"/>
     </data>
 </odoo>
+
+        <!-- VISTA ÁRBOL DE CATEGORÍAS -->
+        <record model="ir.ui.view" id="videoclub_sge.categoria_arbol">
+            <field name="name">videoclub_sge.categoria_arbol</field>
+            <field name="model">videoclub.categoria</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="descripcion"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- VISTA FORMULARIO DE CATEGORÍAS -->
+        <record model="ir.ui.view" id="videoclub_sge.categoria_formulario">
+            <field name="name">videoclub_sge.categoria_formulario</field>
+            <field name="model">videoclub.categoria</field>
+            <field name="arch" type="xml">
+                <form string="Categorías">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="descripcion"/>
+                        </group>
+                        <separator string="Películas"/>
+                        <field name="pelicula_ids">
+                            <tree>
+                                <field name="titulo"/>
+                                <field name="director"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- ACCIÓN DE VENTANA PARA CATEGORÍAS -->
+        <record model="ir.actions.act_window" id="videoclub_sge.categoria_ventana">
+            <field name="name">Categorías</field>
+            <field name="res_model">videoclub.categoria</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- MENÚ PARA CATEGORÍAS -->
+        <menuitem name="Categorías" 
+                  id="videoclub_sge.menu_categorias" 
+                  parent="videoclub_sge.menu_root" 
+                  action="videoclub_sge.categoria_ventana"/>
+
+        <!-- VISTAS PARA COMPAÑÍAS -->
+        <record model="ir.ui.view" id="videoclub_sge.companias_arbol">
+            <field name="name">videoclub_sge.companias_arbol</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="premiada"/>
+                    <field name="is_cine"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="videoclub_sge.companias_formulario">
+            <field name="name">videoclub_sge.companias_formulario</field>
+            <field name="model">res.partner</field>
+            <field name="arch" type="xml">
+                <form string="Compañía">
+                    <sheet>
+                        <group string="COMPAÑÍA CINEMATOGRÁFICA">
+                            <field name="name"/>
+                            <field name="premiada"/>
+                            <field name="is_cine"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- HERENCIA DE VISTA DE CONTACTOS -->
+        <record model="ir.ui.view" id="videoclub_sge.companias_formulario_herencia">
+            <field name="name">videoclub_sge.companias_formulario_herencia</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                    <page name="videoclub" string="Videoclub">
+                        <group>
+                            <field name="premiada"/>
+                            <field name="is_cine"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ACCIÓN DE VENTANA PARA COMPAÑÍAS -->
+        <record model="ir.actions.act_window" id="videoclub_sge.companias_ventana">
+            <field name="name">Compañías</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_cine', '=', True)]</field>
+            <field name="context">{'default_is_cine': True}</field>
+        </record>
+
+        <!-- ENLAZAR VISTAS PERSONALIZADAS -->
+        <record model="ir.actions.act_window.view" id="videoclub_sge.companias_ventana_view_arbol">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="videoclub_sge.companias_arbol"/>
+            <field name="act_window_id" ref="videoclub_sge.companias_ventana"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="videoclub_sge.companias_ventana_view_formulario">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="videoclub_sge.companias_formulario"/>
+            <field name="act_window_id" ref="videoclub_sge.companias_ventana"/>
+        </record>
+
+        <!-- MENÚ PARA COMPAÑÍAS -->
+        <menuitem name="Compañías" 
+                  id="videoclub_sge.menu_companias" 
+                  parent="videoclub_sge.menu_root" 
+                  action="videoclub_sge.companias_ventana"/>

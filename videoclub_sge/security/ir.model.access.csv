@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_videoclub_sge_jefe,Jefe de Pelis,model_videoclub_pelis,videoclub_jefe,1,1,1,1
+access_videoclub_sge_becario,Becario de Pelis,model_videoclub_pelis,videoclub_becario,1,1,0,0
+access_videoclub_categoria_jefe,Jefe Categorías,model_videoclub_categoria,videoclub_jefe,1,1,1,1
+access_videoclub_categoria_becario,Becario Categorías,model_videoclub_categoria,videoclub_becario,1,0,0,0
+access_videoclub_companias_jefe,Jefe Compañías,model_res_partner,videoclub_jefe,1,1,1,1
